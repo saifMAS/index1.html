@@ -209,7 +209,21 @@ section.visible {
   transform: scale(1.05);         /* تكبير بسيط عند المرور */
   background: #0ea5e9;            /* تغيير اللون عند Hover */
 }
+#lang-toggle {
+  margin-left: 20px;
+  padding: 5px 12px;
+  border: none;
+  border-radius: 5px;
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
 
+#lang-toggle:hover {
+  background: #0ea5e9;
+}
   </style>
 </head>
 
@@ -222,6 +236,7 @@ section.visible {
     <a href="#team">Team</a>
     <a href="#contact">Contact</a>
   </div>
+    <button id="lang-toggle">عربي</button>
 </nav>
 
   <!-- Hero -->
@@ -299,6 +314,26 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.2 });
 
 sections.forEach(section => observer.observe(section));
+</script>
+<script>
+const toggleBtn = document.getElementById("lang-toggle");
+let currentLang = "en";
+
+toggleBtn.addEventListener("click", () => {
+  const allElements = document.querySelectorAll("[data-en]");
+  
+  if(currentLang === "en") {
+    allElements.forEach(el => el.innerText = el.dataset.ar);
+    toggleBtn.innerText = "EN";
+    currentLang = "ar";
+    document.body.style.direction = "rtl";
+  } else {
+    allElements.forEach(el => el.innerText = el.dataset.en);
+    toggleBtn.innerText = "عربي";
+    currentLang = "en";
+    document.body.style.direction = "ltr";
+  }
+});
 </script>
 </body>
 </html>
